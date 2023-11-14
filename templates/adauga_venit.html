@@ -1,0 +1,33 @@
+<!-- adauga_venit.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adaugă Venit</title>
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('index') }}">Home</a>
+    </nav>
+
+    <h1>Adaugă Venit</h1>
+
+    <form method="POST" action="{{ url_for('adauga_venit') }}">
+        <label for="suma_venit">Suma:</label>
+        <input type="text" name="suma_venit" required>
+        <label for="moneda_venit">Moneda:</label>
+        <select name="moneda_venit" required>
+            <option value="RON">RON</option>
+            <option value="Euro">Euro</option>
+            <option value="Dolar">Dolar</option>
+            <option value="Lira">Lira</option>
+        </select>
+        <label for="sursa_venit">Sursa:</label>
+        <input type="text" name="sursa_venit" required>
+        <button type="submit">Adaugă venit</button>
+    </form>
+
+    <p><a href="{{ url_for('index') }}">Înapoi la Pagina Principală</a></p>
+</body>
+</html>

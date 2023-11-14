@@ -1,0 +1,65 @@
+<!-- interogare.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interogare Finante</title>
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('adauga_venit') }}">Adaugă Venit</a>
+        <a href="{{ url_for('adauga_cheltuiala') }}">Adaugă Cheltuială</a>
+    </nav>
+
+    <h1>Interogare Finante</h1>
+
+    <form method="POST" action="{{ url_for('interogare') }}">
+        <label for="tip">Tip:</label>
+        <select name="tip">
+            <option value="">-- Alege --</option>
+            <option value="venit">Venit</option>
+            <option value="cheltuiala">Cheltuială</option>
+        </select>
+        <label for="suma">Suma:</label>
+        <input type="text" name="suma">
+        <label for="moneda">Moneda:</label>
+        <select name="moneda">
+            <option value="">-- Alege --</option>
+            <option value="RON">RON</option>
+            <option value="Euro">Euro</option>
+            <option value="Dolar">Dolar</option>
+            <option value="Lira">Lira</option>
+        </select>
+        <label for="sursa">Sursa:</label>
+        <input type="text" name="sursa">
+        <label for="categorie">Categorie:</label>
+        <input type="text" name="categorie">
+        <label for="data">Data (format YYYY-MM-DD HH:MM:SS):</label>
+        <input type="text" name="data">
+        <button type="submit">Filtrează</button>
+    </form>
+
+    {% if mesaj_eroare %}
+        <p>{{ mesaj_eroare }}</p>
+    {% else %}
+        <h2>Rezultate</h2>
+        <ul>
+            {% for finanta in finante %}
+                <li>
+                    Tip: {{ finanta.tip }},
+                    Suma: {{ finanta.suma }},
+                    Moneda: {{ finanta.moneda }},
+                    {% if finanta.tip == 'venit' %}
+                        Sursa: {{ finanta.sursa }},
+                    {% elif finanta.tip == 'cheltuiala' %}
+                        Categorie: {{ finanta.categorie }},
+                    {% endif %}
+                    Data/Ora: {{ finanta.data_ora }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
