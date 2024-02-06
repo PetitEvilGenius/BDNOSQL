@@ -9,6 +9,8 @@
 <body>
     <nav>
         <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('interogare') }}">Interogare</a>
+        <a href="{{ url_for('adauga_cheltuiala') }}">Adaugă Cheltuială</a>
     </nav>
 
     <h1>Adaugă Venit</h1>
@@ -25,8 +27,19 @@
         </select>
         <label for="sursa_venit">Sursa:</label>
         <input type="text" name="sursa_venit" required>
+        <!-- Adăugați următoarele două linii la sfârșitul form-ului -->
         <button type="submit">Adaugă venit</button>
     </form>
+
+    <h2>Istoric Venituri</h2>
+    <ul>
+        {% for venit in venituri %}
+            <li>Suma: {{ venit.suma }}, Moneda: {{ venit.moneda }}, Sursa: {{ venit.sursa }}, Data/Ora: {{ venit.data_ora }}</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Adăugați următoarea linie pentru butonul de printare -->
+    <p><a href="{{ url_for('raport_venituri') }}" target="_blank">Printează Raport Venituri</a></p>
 
     <p><a href="{{ url_for('index') }}">Înapoi la Pagina Principală</a></p>
 </body>

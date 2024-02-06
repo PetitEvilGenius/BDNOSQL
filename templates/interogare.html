@@ -5,6 +5,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interogare Finante</title>
+
+    <style>
+        body {
+            padding: 20px;
+        }
+
+        nav {
+            margin-bottom: 20px;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
     <nav>
@@ -17,28 +40,28 @@
 
     <form method="POST" action="{{ url_for('interogare') }}">
         <label for="tip">Tip:</label>
-        <select name="tip">
-            <option value="">-- Alege --</option>
+        <select name="tip" id="tip">
+            <option value="">Selectează tipul</option>
             <option value="venit">Venit</option>
             <option value="cheltuiala">Cheltuială</option>
         </select>
+
         <label for="suma">Suma:</label>
-        <input type="text" name="suma">
+        <input type="text" name="suma" id="suma">
+
         <label for="moneda">Moneda:</label>
-        <select name="moneda">
-            <option value="">-- Alege --</option>
-            <option value="RON">RON</option>
-            <option value="Euro">Euro</option>
-            <option value="Dolar">Dolar</option>
-            <option value="Lira">Lira</option>
-        </select>
+        <input type="text" name="moneda" id="moneda">
+
         <label for="sursa">Sursa:</label>
-        <input type="text" name="sursa">
+        <input type="text" name="sursa" id="sursa">
+
         <label for="categorie">Categorie:</label>
-        <input type="text" name="categorie">
-        <label for="data">Data (format YYYY-MM-DD HH:MM:SS):</label>
-        <input type="text" name="data">
-        <button type="submit">Filtrează</button>
+        <input type="text" name="categorie" id="categorie">
+
+        <label for="data">Data:</label>
+        <input type="text" name="data" id="data">
+
+        <input type="submit" value="Interogare">
     </form>
 
     {% if mesaj_eroare %}
@@ -61,5 +84,9 @@
             {% endfor %}
         </ul>
     {% endif %}
+
+    <p><a href="{{ url_for('raport_interogare') }}" target="_blank">Printează Raport Interogare</a></p>
+
+    <p><a href="{{ url_for('index') }}">Înapoi la Pagina Principală</a></p>
 </body>
 </html>

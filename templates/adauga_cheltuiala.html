@@ -8,7 +8,9 @@
 </head>
 <body>
     <nav>
-        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('index') }}"> Home </a>
+        <a href="{{ url_for('interogare') }}"> Interogare </a>
+        <a href="{{ url_for('adauga_venit') }}"> Adaugă Venit </a>
     </nav>
 
     <h1>Adaugă Cheltuială</h1>
@@ -25,23 +27,23 @@
         </select>
         <label for="categorie_cheltuiala">Categorie:</label>
         <select name="categorie_cheltuiala" required>
-            <option value="Mancare">Mancare</option>
-            <option value="Intretinere">Intretinere</option>
-            <option value="Curent">Curent</option>
-            <option value="Gaze">Gaze</option>
-            <option value="Internet">Internet</option>
-            <option value="Telefonie">Telefonie</option>
-            <option value="Sanatate">Sanatate</option>
-            <option value="Investitii">Investitii</option>
-            <option value="Calatorii">Calatorii</option>
-            <option value="Iesiri_in_oras">Iesiri in oras</option>
-            <option value="Diverse">Diverse</option>
-            <option value="Cadouri">Cadouri</option>
-            <option value="Chirie">Chirie</option>
-            <option value="Economii">Economii</option>
+            {% for categorie in categorii_cheltuieli %}
+                <option value="{{ categorie }}">{{ categorie }}</option>
+            {% endfor %}
         </select>
+        <!-- Adăugați următoarele două linii la sfârșitul form-ului -->
         <button type="submit">Adaugă cheltuială</button>
     </form>
+
+    <h2>Istoric Cheltuieli</h2>
+    <ul>
+        {% for cheltuiala in cheltuieli %}
+            <li>Suma: {{ cheltuiala.suma }}, Moneda: {{ cheltuiala.moneda }}, Categorie: {{ cheltuiala.categorie }}, Data/Ora: {{ cheltuiala.data_ora }}</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Adăugați următoarea linie pentru butonul de printare -->
+    <p><a href="{{ url_for('raport_cheltuieli') }}" target="_blank">Printează Raport Cheltuieli</a></p>
 
     <p><a href="{{ url_for('index') }}">Înapoi la Pagina Principală</a></p>
 </body>
